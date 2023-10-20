@@ -18,3 +18,6 @@ class Bathroom(db.Model, SerializerMixin):
     # users = db.relationship('User', secondary=user_bathrooms, back_populates='bathrooms')
 
     serialize_rules = ('-reviews.bathroom', '-users.bathrooms')
+
+    def __repr__(self):
+        return f'<Bathroom(id={self.id}, name="{self.bathroom_name}", street_num={self.street_num}, street_name="{self.street_name}", city="{self.city}", zip_code={self.zip_code}, image="{self.image}")>'
