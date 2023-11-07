@@ -1,8 +1,29 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { setBathrooms } from "./reducers/bathroomsSlice";
+import Reviews from "./components/Reviews/Reviews";
 
+import Bathrooms from "./components/Bathrooms/Bathrooms";
 
 function App() {
-  return <h1>Project Client</h1>;
+  const bathrooms = useSelector(state => state.bathrooms.bathrooms)
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    fetch("/api/bathrooms")
+    .then(res => res.json())
+    .then(data => {
+      dispatch(setBathrooms(data))
+    })
+  },[])
+
+
+  return <div>
+    Hello World!
+    <Reviews/>
+
+  </div>;
 }
 
 export default App;

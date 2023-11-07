@@ -1,25 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = []
-
 const reviewsSlice = createSlice({
     name: 'reviews',
-    initialState,
+    initialState: {reviews: []},
     
     reducers: {
   
-      reviewAdded(state, action) {
-        const { id, text } = action.payload
-        state.todos.push({
-          id,
-          text,
-          completed: false
-        })
+      setReviews(state, action) {
+        state.reviews = action.payload
+
       }
     }
   })
   
 
-  export const { reviewAdded } = reviewsSlice.actions
+  export const { setReviews } = reviewsSlice.actions
   
   export default reviewsSlice.reducer
