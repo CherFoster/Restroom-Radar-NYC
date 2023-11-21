@@ -20,8 +20,8 @@ function App() {
 
 
   return <div>
-    Hello World!
-    <Reviews/>
+  
+    <Bathrooms/>
 
   </div>;
 }
