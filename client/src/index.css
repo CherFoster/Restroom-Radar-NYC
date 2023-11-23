@@ -1,7 +1,62 @@
-:root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
-}
-
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a bubbly font */
+    background-color: #202124; /* Dark background color */
+    color: #ffffff; /* White text color */
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .navbar {
+    background-color: #333; /* Dark background color for the navbar */
+    padding: 10px;
+  }
+  
+  .navbar a {
+    color: #ffffff; /* White text color for navbar links */
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px; /* Adjust the font size */
+    letter-spacing: 1px; /* Add letter-spacing for a bubbly feel */
+  }
+  
+  .navbar a:hover {
+    color: #ffcc00; /* Yellow text color on hover */
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  /* Add your specific styling for components here */
+  
+  /* Example styling for Bathrooms component */
+  .bathrooms-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .bathroom-card {
+    background-color: #444; /* Dark background color for individual bathroom cards */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px; /* Adjust the font size */
+  }
+  
+  /* Example styling for Home component */
+  .home-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Add more styles as needed */
+  
+  

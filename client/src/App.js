@@ -2,9 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { setBathrooms } from "./reducers/bathroomsSlice";
-import Reviews from "./components/Reviews/Reviews";
-
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Bathrooms from "./components/Bathrooms/Bathrooms";
+import Home from "./components/Home"
+import NavBar from "./components/NavBar"
 
 function App() {
   const bathrooms = useSelector(state => state.bathrooms.bathrooms)
@@ -19,11 +20,15 @@ function App() {
   },[])
 
 
-  return <div>
-  
-    <Bathrooms/>
-
-  </div>;
+  return(
+    <Router>
+    <NavBar/>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/bathrooms" element={<Bathrooms/>} />
+    </Routes>
+  </Router>
+  )
 }
 
 export default App;

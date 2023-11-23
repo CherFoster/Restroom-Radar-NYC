@@ -1,5 +1,41 @@
 from sqlalchemy_serializer import SerializerMixin
 from config import db
+from sqlalchemy import ForeignKey, Table, Column, Integer, String, ForeignKeyConstraint
+
+
+user_bathrooms = db.Table(
+    'user_bathrooms',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('bathroom_id', db.Integer, db.ForeignKey('bathrooms.id')),
+    db.PrimaryKeyConstraint('user_id', 'bathroom_id')
+)
+
+
+
+
+
+
+
+'''
+    from sqlalchemy_serializer import SerializerMixin
+from config import db
+from sqlalchemy import ForeignKey, Table, Column, Integer, String, ForeignKeyConstraint
+
+
+user_bathrooms = db.Table(
+    'user_bathrooms',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('bathroom_id', db.Integer, db.ForeignKey('bathrooms.id')),
+    db.PrimaryKeyConstraint('user_id', 'bathroom_id')
+)
+
+
+
+
+
+
+from sqlalchemy_serializer import SerializerMixin
+from config import db
 from sqlalchemy import ForeignKey, Table, Column, Integer
 
 # Define the user_bathrooms table separately
@@ -24,21 +60,4 @@ class User_Bathroom(db.Model, SerializerMixin):
     user = db.relationship('User', backref=db.backref('user_bathrooms'))
     bathroom = db.relationship('Bathroom', backref=db.backref('user_bathrooms'))
 
-    serialize_rules = ('-user.user_bathrooms', '-bathroom.user_bathrooms')
-
-
-
-
-
-    '''
-    from sqlalchemy_serializer import SerializerMixin
-from config import db
-from sqlalchemy import ForeignKey, Table, Column, Integer, String, ForeignKeyConstraint
-
-
-user_bathrooms = db.Table(
-    'user_bathrooms',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-    db.Column('bathroom_id', db.Integer, db.ForeignKey('bathrooms.id')),
-    db.PrimaryKeyConstraint('user_id', 'bathroom_id')
-)'''
+    serialize_rules = ('-user.user_bathrooms', '-bathroom.user_bathrooms')'''
