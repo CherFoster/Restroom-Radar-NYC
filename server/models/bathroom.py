@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 from config import db
-
+from .user_bathroom import *
 
 class Bathroom(db.Model, SerializerMixin):
     __tablename__ = 'bathrooms'
@@ -14,8 +14,8 @@ class Bathroom(db.Model, SerializerMixin):
     zip_code = db.Column(db.Integer)
     image = db.Column(db.String)
 
-    # reviews = db.relationship('Review', backref='bathroom')
-    # users = db.relationship('User', secondary=user_bathrooms, back_populates='bathrooms')
+    reviews = db.relationship('Review', backref='bathroom')
+    users = db.relationship('User', secondary=user_bathrooms, back_populates='bathrooms')
 
     serialize_rules = ('-reviews.bathroom', '-users.bathrooms')
 
