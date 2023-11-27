@@ -21,7 +21,7 @@ function CreateBathroom() {
     user: "",
   };
 
-  const validationSchema = Yup.object().shape({
+  const formSchema = Yup.object().shape({
     bathroom_name: Yup.string().required("Bathroom Name is required"), 
     street_num: Yup.string().required("Street Number is required"),    
     street_name: Yup.string().required("Street Name is required"),    
@@ -64,7 +64,7 @@ function CreateBathroom() {
       <p>Here is a chance to share a bathroom you've spotted in NYC. Very easy to add one. Follow the prompts below. </p>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        formSchema={formSchema}
         onSubmit={handleSubmit}
       >
         <Form className="form">
