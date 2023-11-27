@@ -31,7 +31,7 @@ function CreateBathroom() {
   });
 
   const handleSubmit = (values) => {
-    fetch("/bathrooms", {
+    fetch("/api/bathrooms", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
