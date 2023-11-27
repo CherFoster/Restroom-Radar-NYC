@@ -12,7 +12,6 @@ const reviewsSlice = createSlice({
     }
   })
   
-
   export const { setReviews } = reviewsSlice.actions
   
   export default reviewsSlice.reducer

@@ -49,15 +49,14 @@ body {
 }
 
 .bathroom-card {
-  background-color: #444; /* Dark background color for individual bathroom cards */
-  flex: 1; /* Allow bathroom cards to grow and fill the available space */
-  min-width: 300px; /* Set a minimum width for each card */
+  background-color: #444;
+  flex: 0 0 calc(33.3333% - 20px); /* Set flex basis with a gap of 20px between cards */
   padding: 15px;
-  border-radius: 12px; /* Round the corners a bit more for a playful look */
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 18px; /* Adjust the font size */
-  transition: background-color 0.3s ease; /* Add a smooth transition for the hover effect */
-  cursor: pointer; 
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
   margin-bottom: 20px;
 }
 
