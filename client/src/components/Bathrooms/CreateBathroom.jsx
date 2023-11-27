@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux/es/hooks/useSelector'
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -46,7 +46,7 @@ function CreateBathroom() {
         return response.json();
       })
       .then((data) => {
-        // handleAddBathroom(data)
+        dispatch(addBathroom(data))
         navigate("/bathrooms");
       })
       .catch((error) => {

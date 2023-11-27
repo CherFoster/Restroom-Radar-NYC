@@ -11,7 +11,7 @@ const bathroomsSlice = createSlice({
       },
 
       addBathrooms: (state, action) =>{
-        state.bathrooms = action.payload
+        state.bathrooms.push(action.payload)
       }
     }
   })
