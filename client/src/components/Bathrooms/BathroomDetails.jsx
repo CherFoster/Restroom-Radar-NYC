@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setBathrooms } from "../../reducers/bathroomsSlice";
 import { useParams, Link } from 'react-router-dom';
 import Reviews from "../Reviews/Reviews";
 
 function BathroomDetails() {
-  const bathrooms = useSelector(state => state.bathrooms.bathrooms);
-  const dispatch = useDispatch();
   const { id } = useParams();
-  const [bathroom, setBathroom] = useState(null);
+  const [bathroom, setBathroom] = useState({});
   
   useEffect(() => {
     fetch(`/api/bathrooms/${id}`)
@@ -20,8 +16,6 @@ function BathroomDetails() {
 
   return (
     <div className="container">
-      {!bathroom && <div>Loading...</div>}
-      {bathroom && (
         <div>
           <h2>{bathroom.bathroom_name}</h2>
           <div>
@@ -30,10 +24,9 @@ function BathroomDetails() {
             <p>Zip Code: {bathroom.zip_code}</p>
             <hr />
             <Reviews/>
-            <Link to="/">Back to Home</Link>
+            <Link to="/bathrooms">Back to List</Link>
           </div>
         </div>
-      )}
     </div>
   );
 }

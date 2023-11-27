@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addBathrooms } from "../../reducers/bathroomsSlice";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -7,7 +7,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 
 function CreateBathroom() {
-  const bathrooms = useSelector(state => state.bathrooms.bathrooms)
   const dispatch = useDispatch()
 
   const navigate = useNavigate();

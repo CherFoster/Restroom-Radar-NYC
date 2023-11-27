@@ -26,7 +26,7 @@ function Search() {
       <form onSubmit={handleSearch}>
         <input
           type='text'
-          placeholder="Search by zipcode..."
+          placeholder="Search by zip code..."
           value={zipCode}
           onChange={(e) => setZipCode(e.target.value)}
         />
