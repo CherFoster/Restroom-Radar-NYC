@@ -7,6 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 function CreateBathroom() {
   const bathrooms = useSelector(state => state.bathrooms.bathrooms)
+  const dispatch = useDispatch()
 
   // const handleBathroom = (bathroom) => {
   //   let updatedBathrooms = [...data, bathroom]
