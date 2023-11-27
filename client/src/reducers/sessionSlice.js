@@ -4,13 +4,13 @@ const sessionSlice = createSlice({
     name: 'session',
     initialState: { user: null},
     
-    // reducers: {
-    //   setSession: (state, action) =>{
-    //     state.bathrooms = action.payload
-    //   }
-    // }
+    reducers: {
+      setSession: (state, action) =>{
+        state.bathrooms = action.payload
+      }
+    }
   })
 
-  // export const { setSession } = bathroomsSlice.actions
+  export const { setSession } = sessionSlice.actions
 
-  export default bathroomsSlice.reducer
+  export default sessionSlice.reducer

@@ -8,6 +8,8 @@ function NavBar() {
       <h1>WELCOME TO RESTROOM RADAR NYC</h1>
       <Link to="/">Home</Link>
       <Link to="/bathrooms">NYC Bathrooms</Link>
+      <Link to="/add-bathroom">Add New Bathrooms</Link>
+      <Link to="/user">User</Link>
     </nav>
   );
 }

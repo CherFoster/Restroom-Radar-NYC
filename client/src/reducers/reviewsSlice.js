@@ -5,7 +5,6 @@ const reviewsSlice = createSlice({
     initialState: {reviews: []},
     
     reducers: {
-  
       setReviews(state, action) {
         state.reviews = action.payload
 
@@ -17,3 +16,9 @@ const reviewsSlice = createSlice({
   export const { setReviews } = reviewsSlice.actions
   
   export default reviewsSlice.reducer
+
+
+ /*
+ Reviews need to be created, edited? deleted?
+ should be showed under user specifically 
+ */
