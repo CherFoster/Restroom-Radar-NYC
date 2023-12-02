@@ -10,6 +10,8 @@ import User from "./components/User/User";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import Search from "./components/Bathrooms/Search";
+import Login from "./components/User/Login";
+import Signup from "./components/User/Signup"
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
       <Route path="/bathrooms/:id" element={<BathroomDetails/>} />
       <Route path="/search" element={<Search/>} />
       <Route path="/user" element={<User/>}/>
+      <Route path="/login" element={<Login/>} />
+      <Route path="/signup" element={<Signup/>} />
     </Routes>
   </Router>
   )
