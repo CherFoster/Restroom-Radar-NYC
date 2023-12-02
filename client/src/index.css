@@ -75,11 +75,10 @@ body {
 /* Form Styles */
 .form {
   text-align: left;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 20px; /* Add margin to create space between form and other elements */
 }
 
 .form label {
