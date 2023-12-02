@@ -7,14 +7,15 @@ import { Provider } from "react-redux";
 import bathroomsReducer from "./reducers/bathroomsSlice";
 import usersReducer from "./reducers/usersSlice";
 import reviewsReducer from "./reducers/reviewsSlice";
-
+import sessionReducer from "./reducers/sessionSlice"
 
 const store = configureStore({
     // this is the root reducer
     reducer: {
       bathrooms: bathroomsReducer, //how we grab state
       users: usersReducer,
-      reviews: reviewsReducer
+      reviews: reviewsReducer,
+      session: sessionReducer
     }
   })
 
