@@ -110,3 +110,74 @@ body {
 .form button:hover {
   background-color: #3c00ff;
 }
+
+/* Reviews Styles */
+.reviews {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary {
+  background-color: #4e4e52;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #666666;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #666666;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #3c00ff;
+}
+
+.review-list {
+  list-style: none;
+  padding: 0;
+}
+
+.review-item {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-item button {
+  margin-left: 10px;
+}

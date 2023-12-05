@@ -6,7 +6,7 @@ import { setReviews } from "../../reducers/reviewsSlice";
 function Reviews() {
   const reviews = useSelector(state => state.reviews.reviews)
   const dispatch = useDispatch()
-  
+
   const handleDelete = (id) => {
     // Add your delete logic here using the review id
     console.log(`Deleting review with ID: ${id}`);
@@ -33,7 +33,7 @@ function Reviews() {
   });
 
   return (
-    <div className="reviews">
+    <div className="review">
       <h3>REVIEWS:</h3>
       <form className="review-form" onSubmit={formik.handleSubmit}>
         <div className="form-group">
