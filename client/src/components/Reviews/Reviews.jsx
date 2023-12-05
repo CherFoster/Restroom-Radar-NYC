@@ -1,20 +1,19 @@
 import React, {useEffect} from 'react';
 import { useFormik } from 'formik';
-import { useDispatch, useSelector } from "react-redux";
+import * as Yup from 'yup';
+import { useSelector } from "react-redux";
 import { setReviews } from "../../reducers/reviewsSlice";
 
 function Reviews() {
   const reviews = useSelector(state => state.reviews.reviews)
-  const dispatch = useDispatch()
-
-  console.log(reviews)
 
   useEffect(() => {
     fetch("/api/reviews")
     .then(res => res.json())
     .then(data => {
-      console.log(setReviews)
-      dispatch(setReviews(data))
+      console.log(data)
+      setReviews(data)
+      console.log("Test" , reviews)
     })
   },[])
 
@@ -46,7 +45,6 @@ function Reviews() {
   return (
     <div className="review">
       <h3>REVIEWS:</h3>
-      <div>{reviews}</div>
       <form className="review-form" onSubmit={formik.handleSubmit}>
         <div className="form-group">
           <label htmlFor="reviewContent">Add a Review:</label>

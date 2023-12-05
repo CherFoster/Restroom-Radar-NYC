@@ -7,7 +7,6 @@ const reviewsSlice = createSlice({
     reducers: {
       setReviews(state, action) {
         state.reviews = action.payload
-
       }
     }
   })
