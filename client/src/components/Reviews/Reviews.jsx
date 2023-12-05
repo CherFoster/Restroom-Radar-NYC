@@ -5,9 +5,7 @@ import { useSelector } from "react-redux";
 import { setReviews } from "../../reducers/reviewsSlice";
 
 function Reviews() {
-  const reviews = useSelector(state => state.reviews.reviews)
-
-  useEffect(() => {
+    useEffect(() => {
     fetch("/api/reviews")
     .then(res => res.json())
     .then(data => {
@@ -16,6 +14,8 @@ function Reviews() {
       console.log("Test" , reviews)
     })
   },[])
+
+  const reviews = useSelector(state => state.reviews.reviews)
 
   const handleDelete = (id) => {
     // Add your delete logic here using the review id
