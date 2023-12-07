@@ -1,7 +1,7 @@
 body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun and bubbly font */
   background-color: #202124; /* Dark background color */
   color: #ffffff; /* White text color */
 }
@@ -12,14 +12,22 @@ body {
   padding: 20px;
 }
 
-.home-content {
-  padding: 20px; /* Add padding specifically for the home page content */
+.home-content,
+.form,
+.reviews,
+.bathrooms-container {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar {
   background-color: #333; /* Dark background color for the navbar */
   padding: 10px;
   border-radius: 10px; /* Add a bit of curvature for a playful touch */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navbar a {
@@ -32,25 +40,21 @@ body {
 }
 
 .navbar a:hover {
-  color: #3c00ff; /* Yellow text color on hover */
+  color: #3c3cff; /* Yellow text color on hover */
 }
 
-.content {
-  padding: 20px;
-}
-
-/* Example styling for Bathrooms component */
-.bathrooms-container {
+.bathrooms-container,
+.bathroom-list {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: left; 
+  justify-content: left;
 }
 
-.bathroom-card {
+.bathroom-card,
+.bathroom-preview {
   background-color: #444;
-  flex: 0 0 calc(33.3333% - 20px); /* Set flex basis with a gap of 20px between cards */
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -60,81 +64,39 @@ body {
   margin-bottom: 20px;
 }
 
-.bathroom-card:hover {
+.bathroom-card:hover,
+.bathroom-preview:hover {
   background-color: #ffffff; /* Darker color on hover for a subtle effect */
-  color: #3c00ff; /* Change text color on hover */
+  color: #3c3cff; /* Change text color on hover */
 }
 
-/* Example styling for Home component */
-.home-header {
+.home-header,
+.brand {
   font-size: 28px; /* Increase the font size for a more prominent header */
   margin-bottom: 20px;
   color: #ffffff; /* Add a pop of color to the header */
 }
 
-/* Form Styles */
-.form {
-  text-align: left;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.form label,
+.form button,
+.form select,
+.form label[for="city"],
+.review-item button,
+.btn {
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.form label {
+.form label,
+.form label[for="city"] {
   font-weight: bold;
 }
 
 .form input,
 .form textarea,
-.form select {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  resize: vertical; /* Allow vertical resizing of the textarea */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
-
-.form button {
-  background-color: #4e4e52;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.form button:hover {
-  background-color: #3c00ff;
-}
-
-/* Reviews Styles */
-.reviews {
-  margin-top: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.review-form {
-  margin-top: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-control {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
+.form select,
+.form-control,
 .btn {
   padding: 10px 15px;
   border: none;
@@ -143,41 +105,47 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-.btn-primary {
-  background-color: #4e4e52;
-  color: white;
-}
 
-.btn-danger {
-  background-color: #666666;
-  color: white;
-}
-
+.form button,
+.btn-primary,
+.btn-danger,
 .btn-secondary {
-  background-color: #666666;
-  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: rgb(72, 70, 70);
 }
 
-.btn:hover {
-  background-color: #3c00ff;
+.form button,
+.btn-primary,
+.btn-danger,
+.btn-secondary:hover {
+  background-color: #3c3cff;
+}
+
+.form button:hover {
+  background-color: #3030c6;
+}
+
+.reviews {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .review-list {
   list-style: none;
   padding: 0;
 }
-
 .review-item {
   margin-top: 10px;
-  padding: 10px;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 15px; /* Added padding to create space within the box */
+  background-color: #333;
+  border: 1px solid #333;
+  border-radius: 10px; /* Rounded corners for a softer look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.review-item button {
-  margin-left: 10px;
 }

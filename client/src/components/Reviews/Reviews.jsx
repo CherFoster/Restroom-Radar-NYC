@@ -7,13 +7,13 @@ function Reviews() {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews.reviews);
 
-  const bathroom = reviews.bathroom.bathroom_id;
-  const user = reviews.user_id;
+  // const bathroom = reviews.bathroom.bathroom_id;
+  // const user = reviews.user_id;
 
   let initialState = {
     content: '',
-    bathroom_id: bathroom.id || null,
-    user_id: user.id || null,
+    // bathroom_id: bathroom.id || null,
+    // user_id: user.id || null,
   };
 
   const [newReview, setNewReview] = useState(initialState);
@@ -30,7 +30,7 @@ function Reviews() {
   }, [dispatch]);
 
   const handleSubmit = () => {
-    fetch('/reviews', {
+    fetch('/api/reviews', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newReview),
@@ -52,7 +52,7 @@ function Reviews() {
 
   const handleDelete = (id) => {
     // Call API to delete review
-    fetch(`/reviews/${id}`, {
+    fetch(`/api/reviews/${id}`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -102,7 +102,7 @@ function Reviews() {
             value={formik.values.reviewContent}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-secondary">
           Submit
         </button>
       </form>
@@ -110,7 +110,7 @@ function Reviews() {
         {reviews.map((review) => (
           <li key={review.id} className="review-item">
             {review.content}
-            <button onClick={() => handleDelete(review.id)} className="btn btn-danger">
+            <button onClick={() => handleDelete(review.id)} className="btn btn-secondary">
               Delete
             </button>
             <button onClick={() => handleEdit(review.id)} className="btn btn-secondary">
