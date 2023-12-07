@@ -22,9 +22,6 @@ const sessionSlice = createSlice({
     },
     
     reducers: {
-      // setSession: (state, action) =>{
-      //   state.user = action.payload;
-      // }
     },
     extraReducers(builder) {
       builder.addCase(login.pending, (state, action) => {
@@ -42,7 +39,7 @@ const sessionSlice = createSlice({
     }
   })
 
-  export const { setSession } = sessionSlice.actions
+  export const { } = sessionSlice.actions
 
   export default sessionSlice.reducer
 

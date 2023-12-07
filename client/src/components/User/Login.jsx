@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux'
 import { login } from '../../reducers/sessionSlice';
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const initialValues = {
     username: '',
     password: '',
@@ -36,7 +38,7 @@ function Login() {
         return response.json();
       })
       .then(() => {
-        login(values);
+        dispatch(login(values))
         navigate("/bathrooms");
       })
       .catch((error) => {

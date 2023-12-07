@@ -7,28 +7,27 @@ from config import api, db
 class Login(Resource):
     def post(self): 
             request_json = request.get_json()
-            username = request_json['username']
-            password = request_json['password']
+            username = request_json.get('username')
+            password = request_json.get('password')
             user = User.query.filter_by(username=username).first()
-            
             if user and user.authenticate(password):
                 session['user_id'] = user.id
             
                 return user.to_dict(), 200
             else:
-                abort(401, "Incorrect username or password")
+                abort(422, "Incorrect username or password")
         
 api.add_resource(Login, '/api/login')
 
 class Signup(Resource):
     def post(self):
         request_json = request.get_json()
-        username = request_json.get["username"]
-        password = request_json.get["password"]
+        username = request_json.get("username")
+        password = request_json.get("password")
         try:
             user = User(username=username)
             
-            user.password_hash = password
+            user.password = password
             
             db.session.add(user)
             db.session.commit()
