@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { login } from '../../reducers/sessionSlice';
 
 function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const initialValues = {
     username: '',
     password: '',
@@ -16,7 +16,7 @@ function Login() {
   // State variable to track login status
   const [loginError, setLoginError] = useState(null);
 
-  const formSchema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     username: Yup.string()
       .min(7, 'Username must be at least 7 characters long')
       .required('Username is required'),
@@ -38,7 +38,7 @@ function Login() {
         return response.json();
       })
       .then(() => {
-        dispatch(login(values))
+        dispatch(login(values));
         navigate("/bathrooms");
       })
       .catch((error) => {
@@ -52,7 +52,7 @@ function Login() {
       <h1>Log In</h1>
       <Formik
         initialValues={initialValues}
-        formSchema={formSchema}
+        validationSchema={validationSchema} // corrected from formSchema to validationSchema
         onSubmit={handleSubmit}
       >
         {() => (

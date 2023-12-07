@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 import { login } from '../../reducers/sessionSlice';
-import { useDispatch } from 'react-redux'
 
 function Signup() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const initialValues = {
     username: '',
     password: '',
@@ -16,7 +16,7 @@ function Signup() {
   // State variable to track signup status
   const [signupError, setSignupError] = useState(null);
 
-  const formSchema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     username: Yup.string()
       .min(7, 'Username must be at least 7 characters long')
       .required('Username is required'),
@@ -48,16 +48,16 @@ function Signup() {
   };
 
   return (
-    <div>
+    <div className="form">
       <h1>Create an account</h1>
       <Formik
         initialValues={initialValues}
-        formSchema={formSchema}
+        validationSchema={validationSchema} // corrected from formSchema to validationSchema
         onSubmit={handleSubmit}
       >
         {() => (
           <Form>
-            <div className="form">
+            <div>
               <label htmlFor="username">Username</label>
               <Field
                 type="text"
@@ -66,7 +66,8 @@ function Signup() {
                 required
               />
               <ErrorMessage name="username" component="div" className="error" />
-
+            </div>
+            <div>
               <label htmlFor="password">Password</label>
               <Field
                 type="password"
@@ -75,9 +76,9 @@ function Signup() {
                 required
               />
               <ErrorMessage name="password" component="div" className="error" />
-              <button type="submit">Create User</button>
-              {signupError && <div className="error">{signupError}</div>}
             </div>
+            <button type="submit">Create User</button>
+            {signupError && <div className="error">{signupError}</div>}
             <h4>Create a username and password. Username must be seven or more characters long. Password should be unique.</h4>
           </Form>
         )}
