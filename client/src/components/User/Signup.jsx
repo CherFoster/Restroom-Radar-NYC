@@ -48,7 +48,7 @@ function Signup() {
   };
 
   return (
-    <div className="form">
+    <div>
       <h1>Create an account</h1>
       <Formik
         initialValues={initialValues}

@@ -48,7 +48,7 @@ function Login() {
   };
 
   return (
-    <div className="form">
+    <div>
       <h1>Log In</h1>
       <Formik
         initialValues={initialValues}
