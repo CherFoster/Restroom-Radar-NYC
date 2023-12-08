@@ -29,7 +29,6 @@ class Reviews(Resource):
 
 api.add_resource(Reviews, '/api/reviews')
 
-
 class ReviewsByBathroom(Resource):
     def get(self, bathroom_id):
         bathroom = Bathroom.query.filter_by(id=bathroom_id).first()
@@ -41,3 +40,38 @@ class ReviewsByBathroom(Resource):
         return make_response(review_list, 200)
 
 api.add_resource(ReviewsByBathroom, '/api/bathrooms/<int:bathroom_id>/reviews')
+
+class ReviewsResource(Resource):
+    def get(self, id):
+        reviews = Review.query.filter_by(id=id).first()
+        if not reviews:
+            return make_response({'message': 'There are no reviews'}, 404)
+            
+        return reviews.to_dict(), 200
+    
+    def patch(self, id):
+        request_json = request.get_json()
+
+        review = Review.query.get(id)
+        if not review:
+            return make_response({'message': 'Review not found'}, 404)
+
+        # Update the review attributes based on the request JSON
+        review.content = request_json.get('content')
+
+        db.session.commit()
+
+        return make_response({'message': 'Review updated successfully'}, 200)
+
+    def delete(self, id):
+        review = Review.query.get(id)
+        if not review:
+            return make_response({'message': 'Review not found'}, 404)
+
+        db.session.delete(review)
+        db.session.commit()
+
+        return make_response({'message': 'Review deleted successfully'}, 200)
+
+
+api.add_resource(ReviewsResource, '/api/reviews/<int:id>')
