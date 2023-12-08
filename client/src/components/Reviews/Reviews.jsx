@@ -14,7 +14,6 @@ function Reviews({bathroomId}) {
   }, [dispatch, bathroomId]);
 
   const reviewsForBathroom = allReviews.filter(review => review.bathroom_id === Number(bathroomId));
-  console.log(`Reviews for bathroom ${bathroomId}:`, reviewsForBathroom)
 
   const formSchema = yup.object().shape({
     reviewContent: yup.string().required('Review content is required')
