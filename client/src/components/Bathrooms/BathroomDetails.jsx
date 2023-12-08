@@ -23,7 +23,7 @@ function BathroomDetails() {
             <p>City: {bathroom.city}</p>
             <p>Zip Code: {bathroom.zip_code}</p>
             <hr />
-            <Reviews/>
+            <Reviews bathroomId={id}/>
             <Link to="/bathrooms">Back to List</Link>
           </div>
         </div>
