@@ -1,22 +1,59 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, isActionCreator } from '@reduxjs/toolkit'
+
+export const fetchReviews = createAsyncThunk(
+  'reviews/fetchReviews',
+  async(bathroomId) => {
+    const response = await fetch(`/api/bathrooms/${bathroomId}/reviews`);
+    const data = await response.json();
+    return data;
+  }
+);
+
+export const addReview = createAsyncThunk(
+  'reviews/addReviews',
+  async (review) => {
+    const response= await fetch('/api/reviews', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(review),
+    });
+    const data = await response.json();
+    return data
+  }
+);
+
+export const deleteReview = createAsyncThunk(
+  'reviews/deleteReview',
+  async(id) => {
+    await fetch (`/api/reviews/${id}`,{
+      method: "DELETE",
+    });
+    return id;
+  }
+)
 
 const reviewsSlice = createSlice({
     name: 'reviews',
     initialState: {reviews: []},
-    
-    reducers: {
-      setReviews(state, action) {
-        state.reviews = action.payload
+    reducers: {},
+    extraReducers: {
+      [fetchReviews.fulfilled]: (state, action) => {
+        return state = action.payload;
+      },
+      [addReview.fulfilled]: (state, action) => {
+        state.push(action.payload);
+      },
+      [updateReview.fulfilled]:(state, action) => {
+        const index = state.findIndex(review => review.id === action.payload.id);
+        if (index !== -1){
+          state[index] = action.payload;
+        }
+      },
+      [deleteReview.fulfilled]: (state, action) => {
+        return state.filter(review => review.id !== action.payload);
       }
     }
-  })
+  });
   
-  export const { setReviews } = reviewsSlice.actions
-  
+
   export default reviewsSlice.reducer
-
-
- /*
- Reviews need to be created, edited? deleted?
- should be showed under user specifically 
- */
