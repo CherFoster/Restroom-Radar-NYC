@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchReviews, addReview, updateReview, deleteReview } from '../../reducers/reviewsSlice';
@@ -13,7 +13,9 @@ function Reviews({bathroomId}) {
     dispatch(fetchReviews(bathroomId))
   }, [dispatch, bathroomId]);
 
-  const reviewsForBathroom = allReviews.filter(review => review.bathroom_id === Number(bathroomId));
+  // console.log(allReviews)
+  // const reviewsForBathroom = allReviews;
+  // console.log(`Reviews for bathroom ${bathroomId}:`, reviewsForBathroom)
 
   const formSchema = yup.object().shape({
     reviewContent: yup.string().required('Review content is required')
@@ -52,7 +54,7 @@ function Reviews({bathroomId}) {
       >
         {({isSubmitting})=> (
           <Form className="review-form">
-            <Field name="reviewContent" className="form-control"/>
+            <Field placeholder="add a review" name="reviewContent" className="form-control"/>
             <ErrorMessage name="reviewContent" component="div" />
             <button type="submit" disabled={isSubmitting} className="btn btn-primary">
               Submit
@@ -61,7 +63,7 @@ function Reviews({bathroomId}) {
         )}
       </Formik>
       <ul className="review-list">
-        {reviewsForBathroom.map((review) => (
+        {allReviews.map((review) => (
           <li key={review.id} className="review-item">
             {editingReviewId === review.id ? (
               <Formik

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, isActionCreator } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const fetchReviews = createAsyncThunk(
   'reviews/fetchReviews',
@@ -47,7 +47,7 @@ export const deleteReview = createAsyncThunk(
 
 const reviewsSlice = createSlice({
     name: 'reviews',
-    initialState: {reviews: []},
+    initialState: [],
     reducers: {},
     extraReducers: {
       [fetchReviews.fulfilled]: (state, action) => {
