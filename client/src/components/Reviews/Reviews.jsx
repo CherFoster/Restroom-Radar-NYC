@@ -13,9 +13,8 @@ function Reviews({bathroomId}) {
     dispatch(fetchReviews(bathroomId))
   }, [dispatch, bathroomId]);
 
-  // console.log(allReviews)
-  // const reviewsForBathroom = allReviews;
-  // console.log(`Reviews for bathroom ${bathroomId}:`, reviewsForBathroom)
+  const reviewsForBathroom = allReviews.filter(review => review.bathroom_id === Number(bathroomId));
+  console.log(`Reviews for bathroom ${bathroomId}:`, reviewsForBathroom)
 
   const formSchema = yup.object().shape({
     reviewContent: yup.string().required('Review content is required')
@@ -63,7 +62,7 @@ function Reviews({bathroomId}) {
         )}
       </Formik>
       <ul className="review-list">
-        {allReviews.map((review) => (
+        {reviewsForBathroom.map((review) => (
           <li key={review.id} className="review-item">
             {editingReviewId === review.id ? (
               <Formik
