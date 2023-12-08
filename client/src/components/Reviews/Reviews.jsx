@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage,useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import * as yup from'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchReviews, addReview, updateReview, deleteReview } from '../../reducers/reviewsSlice';
@@ -13,7 +13,7 @@ function Reviews({bathroomId}) {
     dispatch(fetchReviews(bathroomId))
   }, [dispatch, bathroomId]);
 
-  const reviewsForBathroom = allReviews.filter(review => review.bathroom_id == Number(bathroomId));
+  const reviewsForBathroom = allReviews.filter(review => review.bathroom_id === Number(bathroomId));
 
   const formSchema = yup.object().shape({
     reviewContent: yup.string().required('Review content is required')
@@ -37,7 +37,7 @@ function Reviews({bathroomId}) {
   };
 
   const handleUpdateReview = (reviewId, values) => {
-    dispatch(updateReview({id: reviewId, review: {values.reviewContent}}))
+    dispatch(updateReview({id: reviewId, review: {content: values.reviewContent}}))
     setEditingReviewId(null)
   }
 
@@ -47,7 +47,7 @@ function Reviews({bathroomId}) {
       <h3>REVIEWS:</h3>
       <Formik
               initialValues={{ reviewContent: ''}}
-              validationSchema={forSchema}
+              validationSchema={formSchema}
               onSubmit={handleAddReview}
       >
         {({isSubmitting})=> (

@@ -22,6 +22,19 @@ export const addReview = createAsyncThunk(
   }
 );
 
+export const updateReview = createAsyncThunk(
+  'reviews/updateReviews',
+  async ({id, review}) => {
+    const response= await fetch(`/api/reviews/${id}`, {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(review),
+    });
+    const data = await response.json();
+    return data
+  }
+);
+
 export const deleteReview = createAsyncThunk(
   'reviews/deleteReview',
   async(id) => {
