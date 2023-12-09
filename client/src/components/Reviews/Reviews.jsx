@@ -67,7 +67,7 @@ function Reviews({bathroomId}) {
               <Formik
               initialValues={{ reviewContent: review.content}}
               validationSchema={yup.object().shape({
-                reviewContent: yup.string.required('Review content is required')
+                reviewContent: yup.string().required('Review content is required')
               })}
               onSubmit={(values) => handleUpdateReview(review.id, {
                 content: values.reviewContent
@@ -80,7 +80,7 @@ function Reviews({bathroomId}) {
                     <button type="submit" disabled={isSubmitting} className="btn btn-primary">
                     Save Changes
                     </button>
-                    <button onClick={() => setEditingReviewId(null)} className="btn btn-primary">
+                    <button onClick={() => setEditingReviewId(allReviews)} className="btn btn-primary">
                     Cancel
                     </button>
                   </Form>
