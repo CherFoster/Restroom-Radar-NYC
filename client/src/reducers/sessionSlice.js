@@ -34,16 +34,26 @@ const sessionSlice = createSlice({
     extraReducers(builder) {
       builder.addCase(login.pending, (state, action) => {
         state.loading = true
-      })
+      });
       builder.addCase(login.fulfilled, (state, action) => {
         state.loading = false
         state.currentUser = action.payload
         state.loggedIn = true
-      })
+      });
       builder.addCase(login.rejected, (state, action) => {
         state.error = action.error
-      })
-
+      });
+      builder.addCase(logout.pending, (state, action) => {
+        state.loading = null
+      });
+      builder.addCase(logout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentUser = null;
+        state.loggedIn = false;
+      });
+      builder.addCase(logout.rejected, (state, action) => {
+        state.error = action.error
+      });
     }
   })
 
