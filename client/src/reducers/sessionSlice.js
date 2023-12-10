@@ -7,11 +7,19 @@ export const login = createAsyncThunk('session/login', async (userData) => {
       "Accept": "application/json",
       "Content-Type": "application/json"
     },
-    body: await response.json(userData)
+    body: JSON.stringify(userData)
   })
 
   return await response.json();
 }) 
+
+export const logout = createAsyncThunk("session/logout", async () => {
+  const response = await fetch("/api/logout", {
+    method: "DELETE",
+  });
+
+  return await response.json();
+});
 
 const sessionSlice = createSlice({
     name: 'session',

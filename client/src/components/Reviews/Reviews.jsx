@@ -37,7 +37,7 @@ function Reviews({bathroomId}) {
   };
 
   const handleUpdateReview = (reviewId, values) => {
-    dispatch(updateReview({id: reviewId, review: {content: values.reviewContent}}))
+    dispatch(updateReview({id: reviewId, review: { content: values.content}}))
     setEditingReviewId(null)
   }
 

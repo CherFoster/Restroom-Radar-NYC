@@ -9,7 +9,7 @@ class Login(Resource):
             request_json = request.get_json()
             username = request_json.get('username')
             password = request_json.get('password')
-            user = User.query.filter_by(username=username).first()
+            user = User.query.filter(User.username == username).first()
             if user and user.authenticate(password):
                 session['user_id'] = user.id
             
@@ -24,24 +24,23 @@ class Signup(Resource):
         request_json = request.get_json()
         username = request_json.get("username")
         password = request_json.get("password")
+        user = User(username=username)
+        user.password = password
         try:
-            user = User(username=username)
-            
-            user.password = password
-            
             db.session.add(user)
             db.session.commit()
 
             session["user_id"] = user.id
-            
-            return user.to_dict(), 201
-    
-        except IntegrityError:
-            return{"error": "Username must be unique"}, 422
-        except ValueError as err:
-            return{"error": str(err)}, 422
 
-api.add_resource(Signup, '/api/signup')
+            return user.to_dict(), 201
+
+        except IntegrityError:
+            return {"error": "Username must be unique"}, 422
+        except ValueError as err:
+            return {"error": str(err)}, 422
+
+
+api.add_resource(Signup, "/api/signup")
 
 class AuthorizedSession(Resource):
     def get(self):
@@ -64,11 +63,11 @@ api.add_resource(Logout, '/api/logout')
 # to store user
 class CheckSession(Resource):
     def get(self):
-        try:
-            user = User.query.filter_by(id=session['user_id']).first()
-           
+        user_id = session.get("user_id")
+        if user_id:
+            user = User.query.filter(User.id == user_id).first()
             return user.to_dict(), 200
-        except:
-            return {"error": "Please log in"}, 401
+
+        return {"error": "Please log in"}, 401
 
 api.add_resource(CheckSession, '/api/check_session')
