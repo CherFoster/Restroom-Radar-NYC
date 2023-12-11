@@ -105,4 +105,3 @@ function Reviews({bathroomId}) {
 }
 
 export default Reviews;
-
