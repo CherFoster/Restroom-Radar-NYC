@@ -56,10 +56,10 @@ const reviewsSlice = createSlice({
       [addReview.fulfilled]: (state, action) => {
         state.push(action.payload);
       },
-      [updateReview.fulfilled]:(state, action) => {
-        const index = state.findIndex(review => review.id === action.payload.id);
-        if (index !== -1){
-          state[index] = action.payload;
+      [updateReview.fulfilled]: (state, action) => {
+        const index = state.findIndex((review) => review.id === action.payload.id);
+        if (index !== -1) {
+          state = [...state.slice(0, index), action.payload, ...state.slice(index + 1)];
         }
       },
       [deleteReview.fulfilled]: (state, action) => {
