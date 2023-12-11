@@ -1,4 +1,4 @@
-from flask import request, make_response
+from flask import session, request, make_response
 from flask_restful import Resource
 from models.models import Review, User, Bathroom
 from config import api, db
@@ -6,14 +6,14 @@ from werkzeug.exceptions import NotFound
 
 class Reviews(Resource):
     def get(self):
-        reviews = [review.to_dict() for review in Review.query.all()]
-        return make_response(reviews, 200)
+        reviews = Review.query.all()
+        review_dicts = [review.to_dict() for review in reviews]
+        return review_dicts, 200
 
     def post(self):
         request_json = request.get_json()
-
+        user_id = session["user_id"]
         content = request_json.get('content')
-        user_id = request_json.get('user_id')
         bathroom_id = request_json.get('bathroom_id')
 
         review = Review(
@@ -25,7 +25,7 @@ class Reviews(Resource):
         db.session.add(review)
         db.session.commit()
 
-        return make_response(review.to_dict(), 201)
+        return review.to_dict(), 201
 
 api.add_resource(Reviews, '/api/reviews')
 
@@ -46,25 +46,29 @@ class ReviewsResource(Resource):
         reviews = Review.query.filter_by(id=id).first()
         if not reviews:
             return make_response({'message': 'There are no reviews'}, 404)
-            
         return reviews.to_dict(), 200
     
     def patch(self, id):
-        request_json = request.get_json()
-
-        review = Review.query.get(id)
-        if not review:
-            return make_response({'message': 'Review not found'}, 404)
-
-        # Update the review attributes based on the request JSON
-        review.content = request_json.get('content')
-
-        db.session.commit()
-
-        return make_response({'message': 'Review updated successfully'}, 200)
+        review = Review.query.filter_by(id=id).first()
+        if review:
+            if review.user_id == session.get('user_id'):
+                try:
+                    data = request.get_json()
+                    for key in data.keys():
+                        if key != "user_id" and key != "bathroom_id" and hasattr(review, key):
+                            setattr(review, key, data[key])
+                    db.session.add(review)
+                    db.session.commit()
+                    return review.to_dict(), 200
+                except ValueError as err:
+                    return {'error': str(err)}, 422
+            else:
+                return {'error': 'Unauthorized'}, 401
+        else:
+            return {'error': 'review does not exist'}, 401
 
     def delete(self, id):
-        review = Review.query.get(id)
+        review = Review.query.filter_by(id=id).first()
         if not review:
             return make_response({'message': 'Review not found'}, 404)
 

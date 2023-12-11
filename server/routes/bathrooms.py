@@ -10,7 +10,6 @@ class Bathrooms(Resource):
 
     def post(self):
         request_json = request.get_json()
-
         bathroom_name = request_json.get('bathroom_name')
         street_num = request_json.get('street_num')
         street_name = request_json.get('street_name')

@@ -24,9 +24,10 @@ class Signup(Resource):
         request_json = request.get_json()
         username = request_json.get("username")
         password = request_json.get("password")
-        user = User(username=username)
-        user.password = password
+
         try:
+            user = User(username=username)
+            user.password = password
             db.session.add(user)
             db.session.commit()
 
@@ -54,9 +55,11 @@ api.add_resource(AuthorizedSession, '/api/authorized')
 
 class Logout(Resource):
     def delete(self):
-        del session['user_id']
-    
-        return {"message": "You have logged out"}, 200
+        if session.get("user_id"):
+            del session["user_id"]
+            return {'message': 'You are not logged in'}, 200
+        else:
+            return {'error': 'You are already logged out'}, 401
     
 api.add_resource(Logout, '/api/logout')
 
