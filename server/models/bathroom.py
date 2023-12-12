@@ -15,7 +15,7 @@ class Bathroom(db.Model, SerializerMixin):
     image = db.Column(db.String)
 
     reviews = db.relationship('Review', backref='bathroom')
-    users = db.relationship('User', secondary=user_bathrooms, back_populates='bathrooms')
+    users = db.relationship('User', secondary='user_bathrooms', back_populates='bathrooms')
 
     serialize_rules = ('-reviews.bathroom', '-users.bathrooms')
 
