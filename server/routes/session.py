@@ -24,10 +24,9 @@ class Signup(Resource):
         request_json = request.get_json()
         username = request_json.get("username")
         password = request_json.get("password")
-
+        user = User(username=username)
+        user.password = password
         try:
-            user = User(username=username)
-            user.password = password
             db.session.add(user)
             db.session.commit()
 

@@ -12,8 +12,8 @@ class Review(db.Model, SerializerMixin):
     bathroom_id = db.Column(db.Integer, db.ForeignKey('bathrooms.id'))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    user = db.relationship("User", back_populates="reviews")
-    bathroom = db.relationship("Bathroom", back_populates="reviews")
+    # user = db.relationship("User", back_populates="reviews")
+    # bathroom = db.relationship("Bathroom", back_populates="reviews")
 
     serialize_rules = (
         "-user.bathroom",

@@ -1,7 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { setBathrooms } from "./reducers/bathroomsSlice";
+import { setUser } from "./reducers/usersSlice";
+import { login, logout } from "./reducers/sessionSlice";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Bathrooms from "./components/Bathrooms/Bathrooms";
 import CreateBathroom from "./components/Bathrooms/CreateBathroom";
@@ -17,7 +19,8 @@ import Signup from "./components/User/Signup"
 function App() {
   const bathrooms = useSelector(state => state.bathrooms.bathrooms)
   const dispatch = useDispatch()
-  
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetch("/api/bathrooms")
     .then(res => res.json())
@@ -26,6 +29,24 @@ function App() {
     })
   },[])
 
+
+ 
+  useEffect(() => {
+    fetch("/api/check_session").then((res) => {
+      if (res.ok){
+        res.json().then((userData) => {
+          dispatch(setUser(userData)); 
+          dispatch(login(userData)); 
+          setLoading(false);
+        });
+      } else {
+        dispatch(logout()); 
+        setLoading(false);
+      }
+    });
+  }, [dispatch]);
+
+  if (loading) return <div>Loading...</div>;
   
   return(
     <Router>
