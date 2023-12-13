@@ -10,6 +10,7 @@ class Login(Resource):
             username = request_json.get('username')
             password = request_json.get('password')
             user = User.query.filter(User.username == username).first()
+            breakpoint()
             if user and user.authenticate(password):
                 session['user_id'] = user.id
             

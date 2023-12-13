@@ -11,14 +11,16 @@ class Reviews(Resource):
         return review_dicts, 200
 
     def post(self):
+        user_id = session.get("user_id")
+        if not user_id:
+            return make_response({"error": "Unauthorized"}, 401)
         request_json = request.get_json()
-        user_id = session["user_id"]
-        content = request_json.get('content')
-        bathroom_id = request_json.get('bathroom_id')
+        content = request_json.get("content")
+        bathroom_id = request_json.get("bathroom_id")
 
         review = Review(
-            content=content,
-            user_id=user_id,
+            content=content, 
+            user_id=user_id, 
             bathroom_id=bathroom_id
         )
 

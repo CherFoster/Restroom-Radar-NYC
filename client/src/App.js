@@ -32,11 +32,11 @@ function App() {
 
  
   useEffect(() => {
-    fetch("/api/check_session").then((res) => {
+    fetch("/api/check_session")
+    .then((res) => {
       if (res.ok){
         res.json().then((userData) => {
           dispatch(setUser(userData)); 
-          dispatch(login(userData)); 
           setLoading(false);
         });
       } else {
