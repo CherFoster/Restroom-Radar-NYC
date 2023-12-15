@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { login } from '../../reducers/sessionSlice';
+import { loginSuccess } from '../../reducers/authSlice';
 
 function Login() {
   const navigate = useNavigate();
@@ -38,8 +38,8 @@ function Login() {
         return response.json();
       })
       .then(() => {
-        dispatch(login(values));
-        navigate("/bathrooms");
+        dispatch(loginSuccess(values));
+        navigate("/");
       })
       .catch((error) => {
         console.error("Fetch error:", error);

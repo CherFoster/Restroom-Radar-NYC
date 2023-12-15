@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import bathroomsReducer from "./reducers/bathroomsSlice";
 import usersReducer from "./reducers/usersSlice";
 import reviewsReducer from "./reducers/reviewsSlice";
+import authReducer from "./reducers/authSlice";
 import sessionReducer from "./reducers/sessionSlice"
 
 const store = configureStore({
@@ -15,6 +16,7 @@ const store = configureStore({
       bathrooms: bathroomsReducer, //how we grab state
       users: usersReducer,
       reviews: reviewsReducer,
+      auth: authReducer,
       session: sessionReducer
     }
   })
