@@ -25,6 +25,7 @@ function NavBar() {
       <Link to="/">Restroom Radar NYC</Link>
       <Link to="/bathrooms">NYC Bathrooms</Link>
       <Link to="/add-bathroom">Add a New Bathroom</Link>
+      <Link to="/user">{user.username} Reviews</Link>
       <Link to="/" onClick={handleLogout}>Log Out</Link>
     </>
   ) : (
