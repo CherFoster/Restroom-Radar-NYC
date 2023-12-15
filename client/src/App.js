@@ -32,20 +32,26 @@ function App() {
 
  
   useEffect(() => {
+    // Check session on app mount
     fetch("/api/check_session")
-    .then((res) => {
-      if (res.ok){
-        res.json().then((userData) => {
-          dispatch(setUser(userData)); 
-          setLoading(false);
-        });
-      } else {
-        dispatch(logout()); 
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("User not authenticated");
+        }
+      })
+      .then((userData) => {
+        dispatch(setUser(userData));
+      })
+      .catch((error) => {
+        console.error("Error checking session:", error);
+        dispatch(logout()); // Logout if there's an error
+      })
+      .finally(() => {
         setLoading(false);
-      }
-    });
+      });
   }, [dispatch]);
-
   if (loading) return <div>Loading...</div>;
   
   return(

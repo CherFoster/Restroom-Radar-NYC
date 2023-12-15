@@ -1,40 +1,43 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from '../reducers/sessionSlice';
+import { logout } from '../reducers/authSlice';
 
 function NavBar() {
-  const { loggedIn, currentUser } = useSelector(store => store.session);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+  console.log("isAuth:", isAuthenticated);
+  console.log("currentUser:", user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logout())
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error('Logout error:', error);
-      });
-  };
+  function handleLogout() {
+    fetch("/api/logout", {
+        method: "DELETE"
+    }).then((res) => {
+        if (res.ok) {
+            dispatch(logout());
+        }
+    });
+}
 
-  const displayedLinks = loggedIn ? (
-    <nav className='navbar'>
+  const displayedLinks = isAuthenticated ? (
+    <>
       <Link to="/">Restroom Radar NYC</Link>
       <Link to="/bathrooms">NYC Bathrooms</Link>
       <Link to="/add-bathroom">Add a New Bathroom</Link>
       <Link to="/" onClick={handleLogout}>Log Out</Link>
-    </nav>
+    </>
   ) : (
-    <nav>
+    <>
       <Link to="/signup">Sign Up</Link>
       <br />
       <Link to="/login">Log In</Link>
-    </nav>
+    </>
   );
 
   return (
     <nav className='navbar'>
-      <h1>WELCOME  {currentUser ? currentUser.username : 'GUEST'} TO RESTROOM RADAR NYC</h1>
+      <h1>WELCOME  {user ? user.username : 'GUEST'} TO RESTROOM RADAR NYC</h1>
       {displayedLinks}
     </nav>
   );
