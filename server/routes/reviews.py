@@ -81,3 +81,15 @@ class ReviewsResource(Resource):
 
 
 api.add_resource(ReviewsResource, '/api/reviews/<int:id>')
+
+
+class ReviewsByUser(Resource):
+    def get(self, user_id):
+        reviews = Review.query.filter_by(user_id=user_id).all()
+        if not reviews:
+            return make_response({'message': 'No reviews found for the specified user'}, 404)
+
+        review_list = [review.to_dict() for review in reviews]
+        return make_response(review_list, 200)
+
+api.add_resource(ReviewsByUser, '/api/users/<int:user_id>/reviews') 

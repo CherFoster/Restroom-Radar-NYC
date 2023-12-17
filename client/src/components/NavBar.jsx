@@ -5,8 +5,6 @@ import { logout } from '../reducers/authSlice';
 function NavBar() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
-  console.log("isAuth:", isAuthenticated);
-  console.log("currentUser:", user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
