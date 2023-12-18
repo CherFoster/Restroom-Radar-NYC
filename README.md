@@ -14,7 +14,6 @@ Restroom Radar NYC is your ultimate companion for seamless bathroom hunting acro
 - You can select a bathroom to see the details of the bathroom and the reviews.
 - You can add any public restroom in NYC. 
 
----
 ## Technologies Used
 
 - Frontend:
@@ -70,7 +69,6 @@ npm start --prefix client
 Check that your the React client displays a default page
 `http://localhost:3000`. 
 
----
 
 ## Resources
 No contributing at this time. For questions, please reach out to restroomradar@gmail.com
