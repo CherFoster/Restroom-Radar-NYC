@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from'yup';
 import { useSelector, useDispatch } from 'react-redux';
-import { setReviewsForBahtroom, addReview, updateReview, deleteReview } from '../../reducers/reviewsSlice';
+import { fetchReviews, addReview, updateReview, deleteReview } from '../../reducers/reviewsSlice';
 
 function Reviews({bathroomId}) {
   const dispatch = useDispatch();
-  const allReviews = useSelector((state) => state.reviewsForBathroom);
+  const allReviews = useSelector((state) => state.reviews);
   const [editingReviewId, setEditingReviewId] = useState(null);
 
   useEffect(() => {
-    dispatch(setReviewsForBahtroom(bathroomId))
+    dispatch(fetchReviews(bathroomId))
   }, [dispatch, bathroomId]);
 
- 
   const reviewsForBathroom = allReviews.filter(review => review.bathroom_id === Number(bathroomId));
 
   const formSchema = yup.object().shape({
@@ -109,21 +108,24 @@ export default Reviews;
 
 
 
+
 // import React, { useState, useEffect } from 'react';
 // import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import * as yup from'yup';
 // import { useSelector, useDispatch } from 'react-redux';
-// import { fetchReviews, addReview, updateReview, deleteReview } from '../../reducers/reviewsSlice';
+// import { setReviewsForBahtroom, addReview, updateReview, deleteReview } from '../../reducers/reviewsSlice';
 
 // function Reviews({bathroomId}) {
 //   const dispatch = useDispatch();
 //   const allReviews = useSelector((state) => state.reviews);
 //   const [editingReviewId, setEditingReviewId] = useState(null);
 
+//   console.log(allReviews)
 //   useEffect(() => {
-//     dispatch(fetchReviews(bathroomId))
+//     dispatch(setReviewsForBahtroom(bathroomId))
 //   }, [dispatch, bathroomId]);
 
+ 
 //   const reviewsForBathroom = allReviews.filter(review => review.bathroom_id === Number(bathroomId));
 
 //   const formSchema = yup.object().shape({
