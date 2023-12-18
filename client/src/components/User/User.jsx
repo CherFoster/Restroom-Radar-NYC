@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function User() {
-  const { loggedIn, currentUser } = useSelector(store => store.auth);
+  const { loggedIn, currentUser } = useSelector((store) => store.auth);
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
 
@@ -12,46 +12,21 @@ function User() {
       navigate('/user');
     } else {
       // Fetch reviews for the logged-in user
-      fetch(`/api/reviews/${currentUser.id}`)
-        .then(response => {
+      fetch(`/api/users/${currentUser}/reviews`)
+        .then((response) => {
           if (!response.ok) {
             throw new Error(`Failed to fetch reviews: ${response.statusText}`);
           }
           return response.json();
         })
-        .then(data => {
-          setReviews(data); 
+        .then((data) => {
+          setReviews(data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     }
-  }, [loggedIn, navigate, currentUser.id]);
-
-  const handleCreateReview = async () => {
-    try {
-      const response = await fetch('/api/reviews', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_id: currentUser,  // expects a user_id
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`Failed to create review: ${response.statusText}`);
-      }
-
-      //show newly created review
-      const newReview = await response.json();
-
-      // Update the state to include the new review created by user
-      setReviews([...reviews, newReview]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  }, [loggedIn, navigate, currentUser]);
 
   if (!loggedIn) {
     return <p>redirecting...</p>;
@@ -60,11 +35,10 @@ function User() {
   return (
     <div>
       <h1>My Reviews</h1>
-      <button onClick={handleCreateReview}>Create Review</button>
-      {reviews.map(review => (
+      {reviews.map((review) => (
         <div key={review.id}>
-          <p>{review.conent}</p>
-          <p>bahtroom name of review?</p>
+          <p>{review.content}</p>
+          <p>bathroom name of review?</p>
         </div>
       ))}
     </div>
@@ -74,10 +48,8 @@ function User() {
 export default User;
 
 
-
-
-
 /*
-I need user to log in and see the reviews they've created... many user will use many bathrooms
-need to grab reviews based on id 
+I want this page to display reviews created the by the use alone
+the session is locked - user is logged in 
+I need to grab reviews created by user...
 */
