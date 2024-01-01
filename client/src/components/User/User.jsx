@@ -3,42 +3,43 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function User() {
-  const { loggedIn, currentUser } = useSelector((store) => store.auth);
+  const { isAuthenticated, user } = useSelector((store) => store.auth);
   const navigate = useNavigate();
-  const [reviews, setReviews] = useState([]);
+  const [userReviews, setUserReviews] = useState([]);
 
   useEffect(() => {
-    if (!loggedIn) {
+    if (!isAuthenticated) {
       navigate('/user');
     } else {
       // Fetch reviews for the logged-in user
-      fetch(`/api/users/${currentUser}/reviews`)
+      fetch(`/api/users/${user.id}/reviews`)
         .then((response) => {
           if (!response.ok) {
-            throw new Error(`Failed to fetch reviews: ${response.statusText}`);
+            throw new Error(`Failed to fetch reviews`);
           }
           return response.json();
         })
         .then((data) => {
-          setReviews(data);
+          setUserReviews(data); // Update the state with fetched reviews
         })
         .catch((error) => {
           console.error(error);
         });
     }
-  }, [loggedIn, navigate, currentUser]);
+  }, [isAuthenticated, navigate, user]);
 
-  if (!loggedIn) {
+  if (!isAuthenticated) {
     return <p>redirecting...</p>;
   }
 
   return (
     <div>
       <h1>My Reviews</h1>
-      {reviews.map((review) => (
+      {userReviews.map((review) => (
         <div key={review.id}>
           <p>{review.content}</p>
-          <p>bathroom name of review?</p>
+          {/* Need to add bathroom id? */}
+          <p>bathroom name to review</p>
         </div>
       ))}
     </div>

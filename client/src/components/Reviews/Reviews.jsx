@@ -8,6 +8,7 @@ function Reviews({bathroomId}) {
   const dispatch = useDispatch();
   const allReviews = useSelector((state) => state.reviews);
   const [editingReviewId, setEditingReviewId] = useState(null);
+  const { user } = useSelector((store) => store.auth);
 
   useEffect(() => {
     dispatch(fetchReviews(bathroomId))
@@ -36,11 +37,11 @@ function Reviews({bathroomId}) {
     setEditingReviewId(reviewId)
   };
 
-  const handleUpdateReview = (reviewId, values) => {
-    dispatch(updateReview({id: reviewId, review: { content: values.content}}))
-    setEditingReviewId(null)
-  }
-
+  const handleUpdateReview = async (reviewId, values) => {
+    await dispatch(updateReview({ id: reviewId, review: { content: values.content } }));
+    setEditingReviewId(null);
+    dispatch(fetchReviews(bathroomId)); // Trigger re-fetching reviews after updating
+  };
 
   return (
     <div className="review">
@@ -65,37 +66,37 @@ function Reviews({bathroomId}) {
           <li key={review.id} className="review-item">
             {editingReviewId === review.id ? (
               <Formik
-              initialValues={{ reviewContent: review.content}}
-              validationSchema={yup.object().shape({
-                reviewContent: yup.string().required('Review content is required')
-              })}
-              onSubmit={(values) => handleUpdateReview(review.id, {
-                content: values.reviewContent
-              })}
+                initialValues={{ reviewContent: review.content }}
+                validationSchema={yup.object().shape({
+                  reviewContent: yup.string().required('Review content is required')
+                })}
+                onSubmit={(values) => handleUpdateReview(review.id, { content: values.reviewContent })}
               >
-                {({isSubmitting})=> (
+                {({ isSubmitting }) => (
                   <Form>
-                    <Field name="reviewContent" className="form-control"/>
+                    <Field name="reviewContent" className="form-control" />
                     <ErrorMessage name="reviewContent" component="div" />
                     <button type="submit" disabled={isSubmitting} className="btn btn-primary">
-                    Save Changes
+                      Save Changes
                     </button>
-                    <button onClick={() => setEditingReviewId(allReviews)} className="btn btn-primary">
-                    Cancel
+                    <button onClick={() => setEditingReviewId(null)} className="btn btn-primary">
+                      Cancel
                     </button>
                   </Form>
                 )}
               </Formik>
-            ):(
-            <>
-                 <p>{review.content}</p>
+            ) : (
+              <>
+                <p>{review.content}</p>
+                {review.user_id === user.id ?                 <>
                 <button onClick={() => handleEdit(review.id)} className="btn">
-                Edit
+                  Edit
                 </button>
                 <button onClick={() => handleDelete(review.id)} className="btn">
-                Delete
+                  Delete
                 </button>
-            </>
+                </> : null }
+              </>
             )}
           </li>
         ))}
