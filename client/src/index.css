@@ -2,8 +2,8 @@ body {
   font-family: 'Comic Sans MS', cursive, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #202124; /* Dark background color */
-  color: #ffffff; /* White text color */
+  background-color: #202124 !important; /* Dark background color */
+  color: #ffffff !important; /* White text color */
 }
 
 .container {
@@ -54,7 +54,8 @@ body {
 
 .bathroom-card,
 .bathroom-preview {
-  background-color: #444;
+  background-color: #444 !important;
+  color: white;
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -66,7 +67,7 @@ body {
 
 .bathroom-card:hover,
 .bathroom-preview:hover {
-  background-color: #ffffff; /* Darker color on hover for a subtle effect */
+  background-color: #756f6f !important; /* Darker color on hover for a subtle effect */
   color: #3c3cff; /* Change text color on hover */
 }
 
@@ -149,3 +150,4 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+

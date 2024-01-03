@@ -13,7 +13,8 @@ import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import Search from "./components/Bathrooms/Search";
 import Login from "./components/User/Login";
-import Signup from "./components/User/Signup"
+import Signup from "./components/User/Signup";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
